@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 // The circle collider is for whether the element is being hovered or not.
@@ -8,6 +9,19 @@ public class DraggableComponent : CursorFollowComponent
     private bool m_isHovered = false;
 
     private bool m_isDragging = false;
+
+    private int m_goldValue;
+    private int m_pValue;
+
+    public int getGoldValue() { return m_goldValue; }
+    public int getpValue() { return m_pValue; }
+
+    public TextMeshProUGUI m_value;
+    public void setValue(int value, int pValue) {
+        m_goldValue = value;
+        m_pValue = pValue;
+        m_value.text = m_goldValue.ToString();
+    }
 
     // while the "Cursor" gameobject (which is just where the user's cursor is) is "hovering" over
     // this element, we want to check to see if the player is trying to move it.
@@ -29,5 +43,10 @@ public class DraggableComponent : CursorFollowComponent
 
         // if we are no longer being hovered or the mouse is lifted, we are no longer dragging
         if (!m_isHovered || Input.GetMouseButtonUp(0)) m_isDragging = false;
+    }
+
+    public bool isPlaced()
+    {
+        return !m_isDragging;
     }
 }
