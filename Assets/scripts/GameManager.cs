@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -43,6 +44,13 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (currentDay == 11)
+        {
+            PlayerPrefs.SetInt("Gold", getGold());
+            PlayerPrefs.SetInt("Prestige", getPrestige());
+            PlayerPrefs.SetInt("Score", getGold() + getPrestige());
+
+            SceneManager.LoadScene(1);
+        }
     }
 }
