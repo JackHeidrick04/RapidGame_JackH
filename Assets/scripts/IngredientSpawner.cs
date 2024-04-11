@@ -6,6 +6,7 @@ using UnityEngine;
 // The class that handles the spawning of potion ingredients via the Draw Ingredients buton
 public class IngredientSpawner : MonoBehaviour
 {
+    private int IngriendentsSpawned = 0;
     private struct IngredientData
     {
         public int Gold;
@@ -17,6 +18,15 @@ public class IngredientSpawner : MonoBehaviour
         }
     }
 
+    public int getIngredientsSpawned()
+    {
+        return IngriendentsSpawned;
+    }
+
+    public void setIngredientsSpawned(int value)
+    {
+        IngriendentsSpawned = value;
+    }
     public RectTransform Target;
     public AnimationCurve FrequencyCurve;
     private List<IngredientData> data;
@@ -35,13 +45,17 @@ public class IngredientSpawner : MonoBehaviour
     /// </summary>
     public void Spawn()
     {
-        GameObject g = GameObject.Instantiate(m_prefab, m_ingredientBar);
-        g.transform.SetParent(m_parentTransform, true);
-        (g.transform as RectTransform).anchoredPosition = Target.anchoredPosition + (m_parentTransform.childCount- 1) *Vector2.right*125;
-        var component = g.GetComponent<DraggableComponent>();
-        var item = data.First<IngredientData>();
-        data.RemoveAt(0);
-        component.setValue(item.Gold, item.Prestige);
+        if (IngriendentsSpawned < 5)
+        {
+            GameObject g = GameObject.Instantiate(m_prefab, m_ingredientBar);
+            g.transform.SetParent(m_parentTransform, true);
+            (g.transform as RectTransform).anchoredPosition = Target.anchoredPosition + (m_parentTransform.childCount - 1) * Vector2.right * 125;
+            var component = g.GetComponent<DraggableComponent>();
+            var item = data.First<IngredientData>();
+            data.RemoveAt(0);
+            component.setValue(item.Gold, item.Prestige);
+            IngriendentsSpawned += 1;
+        }
     }
 
     public void Start()

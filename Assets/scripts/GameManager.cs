@@ -14,10 +14,12 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private UnityEvent<int> OnGoldChanged;
     [SerializeField] private UnityEvent<int> OnPrestigeChanged;
+    [SerializeField] private IngredientSpawner bitch;
 
     public void incrementDays()
     {
         currentDay++;
+        bitch.setIngredientsSpawned(0);
     }
     public int getGold() { return currentGold; }
     public int getPrestige() {  return currentPrestige; }
