@@ -40,7 +40,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -52,7 +52,7 @@ public class GameManager : MonoBehaviour
             PlayerPrefs.SetInt("Prestige", getPrestige());
             PlayerPrefs.SetInt("Score", getGold() + getPrestige());
 
-            SceneManager.LoadScene(1);
+            SceneManager.LoadScene(2);
         }
     }
 }
